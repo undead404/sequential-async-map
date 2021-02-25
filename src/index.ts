@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * @param {T1[]} collection A collection of items to apply f sequentially, item by item
  * @param {(item: T1, index: number, list: T1[]) => Promise<T2>} f An async action to apply to items of the collection
  * @returns {Promise<T2[]>} Results of executions, collected in an array
