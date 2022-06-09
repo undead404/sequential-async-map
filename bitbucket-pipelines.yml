@@ -1,0 +1,16 @@
+image: node:16
+
+pipelines:
+  default:
+    - step:
+        name: Check and build
+        script:
+          - yarn
+          - yarn lint
+          - yarn build
+  branches:
+    main:
+      - step:
+          name: Greeting
+          script:
+            - echo "Hello from main!"
