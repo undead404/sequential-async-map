@@ -1,16 +1,36 @@
 image: node:16
 
+definitions:
+  steps:
+    - step: &installDependencies
+      caches:
+        - node
+      name: Install dependencies
+      script:
+        - yarn install --frozen-lockfile
+    - step: &lint
+      caches:
+        - node
+      name: Lint
+      script:
+        - yarn format
+        - yarn lint
+    - step: &test
+      caches:
+        - node
+      name: test
+      script:
+        - yarn test
+    - step: &build
+      caches:
+        - node
+      name: build
+      script:
+        - yarn build
+
 pipelines:
   default:
-    - step:
-        name: Check and build
-        script:
-          - yarn
-          - yarn lint
-          - yarn build
-  branches:
-    main:
-      - step:
-          name: Greeting
-          script:
-            - echo "Hello from main!"
+    - step: *installDependencies
+    - step: *lint
+    - step: *test
+    - step: *build
